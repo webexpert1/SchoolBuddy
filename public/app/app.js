@@ -41,7 +41,7 @@
                 templateUrl: '/app/templates/classroom.html',
                 controller: 'ClassroomController',
                 controllerAs: 'classroom'
-            })
+            });
 
     }]);
     app.run(['$rootScope', '$log', function($rootScope, $log) {
