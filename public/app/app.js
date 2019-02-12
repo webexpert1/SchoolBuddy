@@ -2,9 +2,11 @@
 
     var app = angular.module('app', ['ui.router']);
 
-    app.config(['$logProvider', '$stateProvider', function ($logProvider, $stateProvider) {
+    app.config(['$logProvider', '$stateProvider', '$urlRouterProvider', function ($logProvider, $stateProvider, $urlRouterProvider) {
 
         $logProvider.debugEnabled(true);
+
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('home', {
@@ -24,11 +26,7 @@
                 controller: 'AllClassroomsController',
                 controllerAs: 'classrooms',
                 templateUrl: '/app/templates/allClassrooms.html',
-                resolve: {
-                    promise: function() {
-                        throw 'error activating classrooms';
-                    }
-                }
+                 
             })
             .state('activities', {
                 url: '/activities',
@@ -41,7 +39,13 @@
                 templateUrl: '/app/templates/classroom.html',
                 controller: 'ClassroomController',
                 controllerAs: 'classroom'
-            });
+            })
+            .state('classroom_detail', {
+                url: '/classrooms/{id:[0-9]}/detail/{month}',
+                templateUrl: '/app/templates/classroomDetail.html',
+                controller: 'ClassroomController',
+                controllerAs: 'classroom'
+            })
 
     }]);
     app.run(['$rootScope', '$log', function($rootScope, $log) {
